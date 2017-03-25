@@ -1,5 +1,5 @@
 {
-  "name": "angular2-seed",
+  "name": "task-manager",
   "version": "1.0.0",
   "description": "A simple starter Angular2 project",
   "scripts": {
@@ -47,17 +47,7 @@
     "webpack-merge": "^0.15.0"
   },
   "keywords": [
-    "Angular2",
-    "angular2-seed",
-    "official angular 2 seed",
-    "official angular2 seed"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/angular/angular2-seed.git"
-  },
-  "bugs": {
-    "url": "https://github.com/angular/angular2-seed/issues"
-  },
-  "homepage": "https://github.com/angular/angular2-seed#readme"
+    "Task manager",
+    "angular2-seed"
+  ]
 }

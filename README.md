@@ -1,5 +1,6 @@
 ## Task Manager
-A simple Task Manager project using MEAN (MongoDB, Express, Angular, Node) stack
+A simple Task Manager project using MEAN (MongoDB, Express, Angular, Node) stack.
+SPA based on https://github.com/angular/angular2-seed#readme
 
 ### Usage
 - Make sure you have [node.js](https://nodejs.org/) installed version 5+
