@@ -7,14 +7,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
 import { AboutComponent } from './about/about.component';
-import { ListsComponent } from './lists/lists.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { ListsComponent, ListsTableComponent } from './lists';
+
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,        
     ListsComponent,
+    ListsTableComponent,
     TasksComponent,
     AboutComponent
   ],
