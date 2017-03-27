@@ -9,15 +9,15 @@ export class ListsApi {
   path: string = '/lists';
   constructor(private apiService: ApiService) {}
 
-  createList(list) {
-    return this.apiService.post(this.path, list)
+  createList(list: List) {
+    return this.apiService.post(this.path, list.convertToUrlParams())
   }
 
   getLists(): Observable<List[]> {
     return this.apiService.get(this.path)
   }
 
-  completeList(list) {
+  deleteList(list) {
     return this.apiService.delete(`${this.path}/${list.id}`)
   }
 }

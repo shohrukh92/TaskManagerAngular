@@ -3,7 +3,8 @@
 
   <div class="panel-body">
     <p>In this section You can add task lists (where you can add tasks later on Tasks section)</p>  
-    <add-list-form></add-list-form>
+    <add-list-form [listEditMode]="listEditMode" (createListEvent)="onCreateList($event)">
+    </add-list-form>
   </div>
 
   <lists-table [taskLists]="taskLists"></lists-table>

@@ -7,8 +7,7 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class ApiService {
   private _headers: Headers = new Headers({
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    'Content-Type': 'application/x-www-form-urlencoded'
   });
 
   private _apiURL: string = 'http://localhost:3500';
@@ -30,32 +29,22 @@ export class ApiService {
     }
   }
 
-
   get(path: string): Observable<any> {
-    return this._http.get(
-      `${this._apiURL}${path}`
-    )
+    return this._http.get(`${this._apiURL}${path}`)
     .map(this._checkForError)
     .catch(err => Observable.throw(err))
     .map(this._getJson)
   }
 
   post(path: string, body): Observable<any> {
-    return this._http.post(
-      `${this._apiURL}${path}`,
-      JSON.stringify(body),
-      { headers: this._headers }
-    )
+    return this._http.post(`${this._apiURL}${path}`, body, {headers: this._headers})
     .map(this._checkForError)
     .catch(err => Observable.throw(err))
     .map(this._getJson)
   }
 
   delete(path: string): Observable<any> {
-    return this._http.delete(
-      `${this._apiURL}${path}`,
-      { headers: this._headers }
-    )
+    return this._http.delete(`${this._apiURL}${path}`, {headers: this._headers})
     .map(this._checkForError)
     .catch(err => Observable.throw(err))
     .map(this._getJson)

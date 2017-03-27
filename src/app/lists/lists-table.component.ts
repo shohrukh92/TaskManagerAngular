@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { List } from './lists.component';
+import { List } from './list';
 
 @Component({
     selector: 'lists-table',
