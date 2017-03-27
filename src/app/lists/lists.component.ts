@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ListsApi } from '../services';
 import { List } from './list';
 
@@ -8,11 +8,14 @@ import { List } from './list';
   templateUrl: './lists.component.html'
 })
 
-export class ListsComponent {
+export class ListsComponent implements OnInit {
   taskLists: List[] = [];
   listEditMode: boolean = false;
 
-  constructor(private _listsApi: ListsApi) {
+  constructor(private _listsApi: ListsApi) { }
+
+  ngOnInit() {
+    console.log('onInit');
     this._listsApi.getLists()
     .subscribe(
         (response) => { 
