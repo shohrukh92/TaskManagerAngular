@@ -14,12 +14,17 @@ export class ListsComponent implements OnInit {
 
   constructor(private _listsApi: ListsApi) { }
 
+  toListObject(listObject) {
+    return new List(listObject.title, listObject.description, listObject._id);
+  }
+
   ngOnInit() {
     console.log('onInit');
     this._listsApi.getLists()
     .subscribe(
         (response) => { 
-          this.taskLists = response;
+          this.taskLists = response.map(this.toListObject);
+          console.log(response);
         },
         (error) => { 
           console.log("Error happenedd " + error);

@@ -17,7 +17,8 @@ export class ListsApi {
     return this.apiService.get(this.path)
   }
 
-  deleteList(list) {
-    return this.apiService.delete(`${this.path}/${list.id}`)
+  deleteList(list: List) {
+    console.log("will be removed later ", list);
+    //return this.apiService.delete(`${this.path}/${list.id}`)
   }
 }

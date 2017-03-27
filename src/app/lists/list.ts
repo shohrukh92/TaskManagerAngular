@@ -3,10 +3,12 @@ import { URLSearchParams } from '@angular/http';
 export class List {
   title: string;
   description: string;
+  _id: string;
 
-  constructor(newTitle: string = "", newDescription: string = "") {
+  constructor(newTitle: string = "", newDescription: string = "", newId: string = "") {
     this.title = newTitle;
     this.description = newDescription;
+    this._id = newId;
   }
 
   isValidList() {

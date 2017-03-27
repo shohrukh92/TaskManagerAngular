@@ -29,7 +29,7 @@ import { List } from './list';
 
 export class AddListFormComponent {
     @Input() listEditMode = false;
-    @Output() createListEvent = new EventEmitter();
+    @Output() createListEvent = new EventEmitter<List>();
 
     newList: List = new List();
     
