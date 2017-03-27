@@ -1,18 +1,9 @@
 <div class="panel panel-default">
   <div class="panel-heading">Task Lists</div>
+
   <div class="panel-body">
-    <p>In this section You can add list</p>
-    <form class="form-inline">
-      <div class="form-group">
-        <label>Title</label>
-        <input type="text" class="form-control" placeholder="My list">
-      </div>
-      <div class="form-group">
-        <label>Description</label>
-        <input type="text" class="form-control" placeholder="List description">
-      </div>
-      <button type="submit" class="btn btn-success">Add</button>
-    </form>
+    <p>In this section You can add task lists (where you can add tasks later on Tasks section)</p>  
+    <add-list-form></add-list-form>
   </div>
 
   <lists-table [taskLists]="taskLists"></lists-table>

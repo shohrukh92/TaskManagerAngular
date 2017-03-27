@@ -1,4 +1,10 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { ListsApi } from '../services';
+
+export class List {
+  title: string;
+  description: string;
+}
 
 @Component({
   selector: 'lists',
@@ -7,18 +13,18 @@ import {Component} from '@angular/core';
 })
 
 export class ListsComponent {
-  taskLists = [
-    {
-      title: "List 1",
-      description: "List 1 description"
-    },
-    {
-      title: "List 2",
-      description: "List 2 description"
-    },
-    {
-      title: "List 3",
-      description: "List 3 description"
-    }
-  ]
+  taskLists: List[] = []
+
+  constructor(private _listsApi: ListsApi) {
+    this._listsApi.getLists()
+    .subscribe(
+        (response) => { 
+          this.taskLists = response;
+          console.log(this.taskLists)
+        },
+        (error) => { console.log("Error happenedd " + error) },
+        () => { console.log("the subscription is completed ") }
+    );
+  }
+
 }

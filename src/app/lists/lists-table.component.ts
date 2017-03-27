@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { List } from './lists.component';
 
 @Component({
     selector: 'lists-table',
@@ -6,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 
 export class ListsTableComponent {
-    @Input() taskLists = [];
+    @Input() taskLists:List[] = [];
 }
