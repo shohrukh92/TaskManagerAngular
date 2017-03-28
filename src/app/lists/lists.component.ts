@@ -14,17 +14,15 @@ export class ListsComponent implements OnInit {
 
   constructor(private _listsApi: ListsApi) { }
 
-  toListObject(listObject) {
+  toListClass(listObject) {
     return new List(listObject.title, listObject.description, listObject._id);
   }
 
   ngOnInit() {
-    console.log('onInit');
     this._listsApi.getLists()
     .subscribe(
         (response) => { 
-          this.taskLists = response.map(this.toListObject);
-          console.log(response);
+          this.taskLists = response.map(this.toListClass);
         },
         (error) => { 
           console.log("Error happenedd " + error);
@@ -32,18 +30,15 @@ export class ListsComponent implements OnInit {
     );
   }
 
-  onCreateList(newList: List) {
-    console.log(newList.convertToUrlParams());
-    
+  onCreateList(newList) {
     this._listsApi.createList(newList)
-      .subscribe(
-          (response) => {
-              console.log(response);
-              this.taskLists.push(newList);
-          },
-          (error) => { 
-              console.log("Error happened " + error);
-          }
-      );
+    .subscribe(
+      (response) => {
+        this.taskLists.push(this.toListClass(response.insertedList));
+      },
+      (error) => { 
+        console.log("Error happened " + error);
+      }
+    );
   }
 }

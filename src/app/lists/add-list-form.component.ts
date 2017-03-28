@@ -37,7 +37,7 @@ export class AddListFormComponent {
 
     addNewList() {
         if (this.newList.isValidList()) {
-            this.createListEvent.emit(new List(this.newList.title, this.newList.description));
+            this.createListEvent.emit(this.newList);
         }
         else {
             console.log("empty list (at least title should not be empty)");
