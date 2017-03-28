@@ -1,1 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700);
+
+.table th.table-first-column {
+  width: 50px;
+}
+
+.table-actions span.glyphicon {
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #999999;
+}
+
+.table-actions span.glyphicon:hover {
+  cursor: pointer;
+  color: #333333;
+}

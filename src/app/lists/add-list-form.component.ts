@@ -4,27 +4,7 @@ import { List } from './list';
 
 @Component({
     selector: 'add-list-form',
-    template: `
-        <form class="form-inline">
-            <div class="form-group">
-                <label>Title</label>
-                <input 
-                    [(ngModel)]="newList.title" 
-                    name="newListTitle"
-                    type="text" class="form-control" placeholder="My list"
-                >
-            </div>
-            <div class="form-group">
-                <label>Description</label>
-                <input 
-                    [(ngModel)]="newList.description"
-                    name="newListDescription"
-                    type="text" class="form-control" placeholder="List description">
-            </div>
-            <button (click)="addNewList()" type="submit" class="btn btn-success">Add</button>
-            <button *ngIf="listEditMode" type="submit" class="btn btn-info">Save</button>
-        </form>
-    `
+    templateUrl: './add-list-form.component.html'
 })
 
 export class AddListFormComponent {
