@@ -40,7 +40,12 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 	});
 
 	app.post('/lists', (req, res) => {
-		db.collection('lists').insert(req.body, function(err, docsInserted){
+		let insertDoc = {
+			title: req.body.title,
+			description: req.body.description
+		};
+		
+		db.collection('lists').insert(insertDoc, function(err, docsInserted){
 		    res.set(RESPONSE_HEADERS);
 	  		res.json({'status': 'SUCCESS', 'insertedList': docsInserted.ops[0]});
 		});		
