@@ -23,6 +23,7 @@ export class List {
     let urlSearchParams = new URLSearchParams();
     urlSearchParams.append('title', this.title);
     urlSearchParams.append('description', this.description);
+    urlSearchParams.append('_id', this._id);
     return urlSearchParams.toString();
   }
 }

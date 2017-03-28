@@ -5,10 +5,12 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectID;
+
 const MONGO_LAB_DB_URL = 'mongodb://testuser:olkefk4394kfwejf04@ds141950.mlab.com:41950/taskmanager';
 const APP_PORT = process.env.PORT || 3500;
-const HEADERS = {
+const RESPONSE_HEADERS = {
   'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods' : 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
@@ -29,7 +31,7 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 			if (err) {
 	            console.log(err);
 	        } else {
-	        	res.set(HEADERS);
+	        	res.set(RESPONSE_HEADERS);
 	            res.json(data);
 	        }
 		});
@@ -39,10 +41,19 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 
 	app.post('/lists', (req, res) => {
 		db.collection('lists').insert(req.body, function(err, docsInserted){
-		    res.set(HEADERS);
+		    res.set(RESPONSE_HEADERS);
 	  		res.json({'status': 'SUCCESS', 'insertedList': docsInserted.ops[0]});
 		});		
 	});
+
+	/*TODO: app.delete('/lists/:list_id', (req, res) => {})*/
+	app.post('/lists/delete', (req, res) => {
+		let _id = req.body._id;
+		db.collection('lists').remove({"_id": ObjectId(_id)}, (err, ins) => {
+			res.set(RESPONSE_HEADERS);
+	  		res.json({'status': 'SUCCESS'});
+		});
+	})
 
 
 	app.listen(APP_PORT, () => {

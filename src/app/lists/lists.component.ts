@@ -33,12 +33,28 @@ export class ListsComponent implements OnInit {
   onCreateList(newList) {
     this._listsApi.createList(newList)
     .subscribe(
-      (response) => {
-        this.taskLists.push(this.toListClass(response.insertedList));
+      (response) => { 
+        this.taskLists.push(this.toListClass(response.insertedList)); 
       },
       (error) => { 
-        console.log("Error happened " + error);
+        console.log("Error happened " + error); 
       }
     );
   }
+
+  onDeleteList(removedList) {
+    this._listsApi.deleteList(removedList)
+      .subscribe(
+          (response) => { 
+            let removedListIndex = this.taskLists.findIndex((currentList) => {
+              return currentList._id == removedList._id;
+            });
+            this.taskLists.splice(removedListIndex, 1);
+          },
+          (error) => { 
+            console.log("Error happened " + error); 
+          }
+      );
+  }
+  
 }

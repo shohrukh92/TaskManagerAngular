@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { RootRouterConfig } from './app.routes';
@@ -27,7 +27,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpModule, 
+    JsonpModule,
     RouterModule.forRoot(RootRouterConfig, { useHash: true })
   ],
   providers: [

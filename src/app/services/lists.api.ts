@@ -7,19 +7,17 @@ import 'rxjs/Rx';
 @Injectable()
 export class ListsApi {
   path: string = '/lists';
-  constructor(private apiService: ApiService) {}
+  constructor(private _apiService: ApiService) {}
 
   createList(list: List) {
-    return this.apiService.post(this.path, list.convertToUrlParams())
+    return this._apiService.post(this.path, list.convertToUrlParams());
   }
 
   getLists(): Observable<List[]> {
-    return this.apiService.get(this.path)
+    return this._apiService.get(this.path);
   }
 
   deleteList(list: List) {
-    alert("will be removed later");
-    console.log("will be removed later ", list);
-    //return this.apiService.delete(`${this.path}/${list.id}`)
+    return this._apiService.delete(`${this.path}/delete`, list.convertToUrlParams());
   }
 }
