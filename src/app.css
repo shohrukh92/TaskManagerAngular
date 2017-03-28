@@ -1,5 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700);
 
+.app-spinner {
+  background: url(img/loading.gif) no-repeat center center;
+  height: 400px;
+  width: 100%;
+}
+
 .table th.table-first-column {
   width: 50px;
 }
