@@ -16,7 +16,7 @@ export class List {
   }
   
   clear() {
-    this.title = this.description = "";
+    this.title = this.description = this._id = "";
   }  
 
   convertToUrlParams() {

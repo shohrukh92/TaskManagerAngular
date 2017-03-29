@@ -46,8 +46,6 @@ export class ApiService {
 
 
   delete(path: string, body): Observable<any> {  
-    console.log(path, body);
-    
     return this._http.post(`${this._apiURL}${path}`, body, this._options)
       .map(this._checkForError)
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
