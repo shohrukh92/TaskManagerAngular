@@ -8,7 +8,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { RootRouterConfig } from './app.routes';
 import { AboutComponent } from './about/about.component';
-import { TasksComponent } from './tasks/tasks.component';
+import { TasksComponent, TasksTableComponent } from './tasks';
 import { ListsComponent, ListsTableComponent, AddListFormComponent } from './lists';
 import { ApiService, ListsApi } from './services';
 
@@ -17,10 +17,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,        
-    ListsComponent,
-    ListsTableComponent,
-    AddListFormComponent,
-    TasksComponent,
+    ListsComponent, ListsTableComponent, AddListFormComponent,
+    TasksComponent, TasksTableComponent,
     AboutComponent
   ],
   imports: [
