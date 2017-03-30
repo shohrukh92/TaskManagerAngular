@@ -4,6 +4,7 @@ import { List } from './list';
 
 @Component({
   selector: 'lists',
+  providers: [ListsApi],
   styleUrls: ['./lists.component.css'],
   templateUrl: './lists.component.html'
 })

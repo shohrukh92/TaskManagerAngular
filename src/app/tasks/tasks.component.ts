@@ -4,6 +4,7 @@ import { Task } from './task';
 
 @Component({
   selector: 'tasks',
+  providers: [TasksApi],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css']
 })

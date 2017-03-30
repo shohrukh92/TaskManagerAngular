@@ -10,7 +10,7 @@ import { RootRouterConfig } from './app.routes';
 import { AboutComponent } from './about/about.component';
 import { TasksComponent, TasksTableComponent } from './tasks';
 import { ListsComponent, ListsTableComponent, AddListFormComponent } from './lists';
-import { ApiService, ListsApi, TasksApi } from './services';
+import { ApiService } from './services';
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
@@ -30,9 +30,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     RouterModule.forRoot(RootRouterConfig, { useHash: true })
   ],
   providers: [
-    ApiService,
-    ListsApi,
-    TasksApi
+    ApiService
   ],
   bootstrap: [ AppComponent ]
 })
