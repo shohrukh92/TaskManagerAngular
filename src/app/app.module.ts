@@ -10,7 +10,7 @@ import { RootRouterConfig } from './app.routes';
 import { AboutComponent } from './about/about.component';
 import { TasksComponent, TasksTableComponent } from './tasks';
 import { ListsComponent, ListsTableComponent, AddListFormComponent } from './lists';
-import { ApiService, ListsApi } from './services';
+import { ApiService, ListsApi, TasksApi } from './services';
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
@@ -31,7 +31,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
   ],
   providers: [
     ApiService,
-    ListsApi
+    ListsApi,
+    TasksApi
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { TasksApi } from '../services';
+import { Task } from './task';
 
 @Component({
   selector: 'tasks',
@@ -7,13 +8,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent {
-  allTasks = [
-    {title: "Task title 1", isCompleted: false, listId: "123"},
-    {title: "Task title 2", isCompleted: true, listId: "123"},
-    {title: "Task title 3", isCompleted: false, listId: "123"},
-    {title: "Task title 4", isCompleted: true, listId: "123"}
-  ]
-  constructor() {
+  allTasks: Task[] = [];
+  
+  constructor(private _tasksApi: TasksApi) {
 
+  }
+
+  private _toTaskClass(taskObject) {
+    return new Task();
+  }
+
+  ngOnInit() {
+    this._tasksApi.getTasks()
+    .subscribe(
+        (response) => { 
+          console.log(response);
+          //this.allTasks = response.map(this._toTaskClass);
+          this.allTasks = response;
+        },
+        (error) => { 
+          console.log("Error happenedd " + error);
+        }
+    );
   }
 }

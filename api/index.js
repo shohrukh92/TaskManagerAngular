@@ -25,9 +25,9 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
   	console.log('connected to db ' + MONGO_LAB_DB_URL);
 
   		
-
+  	//TODO: implement routing
 	app.get('/lists', (req, res) => {
-		let findResult = db.collection('lists').find({}).toArray((err, data) => {
+		db.collection('lists').find({}).toArray((err, data) => {
 			if (err) {
 	            console.log(err);
 	        } else {
@@ -35,8 +35,6 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 	            res.json(data);
 	        }
 		});
-
-	  	//res.send(findResult);
 	});
 
 	app.post('/lists', (req, res) => {
@@ -59,6 +57,48 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 	  		res.json({'status': 'SUCCESS'});
 		});
 	})
+
+
+	//-----------------------------------------------------------------------------
+	app.get('/tasks', (req, res) => {
+		db.collection('tasks').find({ }).toArray((err, data) => {
+			if (err) {
+	            console.log(err);
+	        } else {
+	        	res.set(RESPONSE_HEADERS);
+	            res.json(data);
+	        }
+		});
+
+		/*db.collection('lists').find({}).toArray((err, data) => {
+			if (err) {
+	            console.log(err);
+	        } else {
+	        	getAllTasks(data);
+	        }
+		});
+
+		function getAllTasks(lists) {
+			let allTasks = [];
+
+			lists.forEach((list) => {
+				let listTasks = {
+					parentList: list,
+					tasks: []
+				};
+				db.collection('tasks').find({ _id : list._id }).toArray((err, data) => {
+					if (err) {
+			            console.log(err);
+			        } else {
+			        	listTasks.tasks.push(data);
+			        }
+				});
+				allTasks.push(listTasks);
+				//TODO: Promise or JOIN documents in Mongo
+			});
+		}*/
+	});
+
 
 
 	app.listen(APP_PORT, () => {
