@@ -23,7 +23,6 @@ export class Task {
     urlSearchParams.append('title', this.title);
     urlSearchParams.append('isCompleted', String(this.isCompleted));
     urlSearchParams.append('_id', this._id);
-    urlSearchParams.append('listId', this.listId);
     return urlSearchParams.toString();
   }
 }

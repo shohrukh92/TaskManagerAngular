@@ -97,8 +97,19 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 	});
 
 	app.put('/tasks', (req, res) => {
-		console.log(req.body);
-		res.json({'status': 'SUCCESS'});
+		let updatedTask = req.body;
+
+		db.collection('tasks').update(
+		   { _id: ObjectId(updatedTask._id) },
+		   { 
+		   		$set: {
+					isCompleted: updatedTask.isCompleted
+				}
+		   }
+		)
+		res.json({'status': 'SUCCESS',
+			"upd": updatedTask
+		});
 	});
 
 

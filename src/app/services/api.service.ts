@@ -38,15 +38,24 @@ export class ApiService {
 
 
   post(path: string, body): Observable<any> {
-    return this._http.post(`${this._apiURL}${path}`, body, this._options)
+    return this._http
+      .post(`${this._apiURL}${path}`, body, this._options)
       .map(this._checkForError)
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
       .map(this._getJson)
   }
 
+  put(path: string, body): Observable<any> {
+    return this._http
+      .put(`${this._apiURL}${path}`, body)
+      .map(this._checkForError)
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+      .map(this._getJson)
+  }
 
-  delete(path: string, body): Observable<any> {  
-    return this._http.post(`${this._apiURL}${path}`, body, this._options)
+  delete(path: string): Observable<any> {  
+    return this._http
+      .delete(`${this._apiURL}${path}`)
       .map(this._checkForError)
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
       .map(this._getJson)

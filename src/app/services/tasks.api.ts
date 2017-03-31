@@ -13,11 +13,15 @@ export class TasksApi {
     return this._apiService.post(this.path, task.convertToUrlParams());
   }
 
+  updateTask(task: Task) {
+    return this._apiService.put(this.path, task);
+  }
+
   getTasks(): Observable<Task[]> {
     return this._apiService.get(this.path);
   }
 
-  deleteTask(task: Task) {
-    return this._apiService.delete(`${this.path}/delete`, task.convertToUrlParams());
+  deleteTask(taskId: string, task: Task) {
+    return this._apiService.delete(`${this.path}/${taskId}`);
   }
 }

@@ -24,4 +24,16 @@ export class TasksComponent {
         }
     );
   }
+
+  onUpdateTaskStatus(task: Task) {
+    this._tasksApi.updateTask(task)
+    .subscribe(
+        (response) => { 
+          console.log(`Task ${task.title} was updated`);          
+        },
+        (error) => { 
+          console.log("Error happenedd " + error);
+        }
+    );
+  }
 }

@@ -13,7 +13,11 @@
             <td>
               <div class="checkbox task-checkbox">
                 <label>
-                  <input type="checkbox" [(ngModel)]="task.isCompleted">
+                  <input 
+                    type="checkbox" 
+                    [checked]="task.isCompleted"
+                    (click)="updateTaskStatus(task)"
+                  >
                   <span 
                     [ngStyle]="{'text-decoration': (task.isCompleted == true) ? 'line-through' : 'none'}">
                     {{ task.title }} 

@@ -9,6 +9,7 @@
 
   <tasks-table 
     [allTasks]="allTasks"
+    (updateTaskStatusEvent)="onUpdateTaskStatus($event)"
   >
   </tasks-table>
 </div>
