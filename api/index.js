@@ -61,16 +61,7 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 
 	//-----------------------------------------------------------------------------
 	app.get('/tasks', (req, res) => {
-		db.collection('tasks').find({ }).toArray((err, data) => {
-			if (err) {
-	            console.log(err);
-	        } else {
-	        	res.set(RESPONSE_HEADERS);
-	            res.json(data);
-	        }
-		});
-
-		/*db.collection('lists').find({}).toArray((err, data) => {
+		db.collection('lists').find({}).toArray((err, data) => {
 			if (err) {
 	            console.log(err);
 	        } else {
@@ -79,32 +70,49 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 		});
 
 		function getAllTasks(lists) {
-			let allTasks = [];
-
+			let promises = [];
+			
 			lists.forEach((list) => {
-				let listTasks = {
-					parentList: list,
-					tasks: []
-				};
-				db.collection('tasks').find({ _id : list._id }).toArray((err, data) => {
-					if (err) {
-			            console.log(err);
-			        } else {
-			        	listTasks.tasks.push(data);
-			        }
-				});
-				allTasks.push(listTasks);
-				//TODO: Promise or JOIN documents in Mongo
+				promises.push(new Promise((resolve, reject) => {
+					db.collection('tasks')
+					  .find({ listId : String(list._id) })
+					  .toArray((err, tasksArrData) => {
+						if (err) {
+				            console.log(err);
+				            reject(err);
+				        } else {
+				        	let result = []
+				        	tasksArrData.forEach((task) => {
+				        		task.listTitle = list.title;
+				        		result.push(task);
+				        	})
+				        	resolve(result);
+				        }
+					});
+				}));
 			});
-		}*/
+			Promise.all(promises).then(values => { 
+			  	//values is array of arrays
+			  	//TODO: code refactoring
+			  	let allTasks = []
+			  	values.forEach(tasksArr => {
+			  		tasksArr.forEach(task => allTasks.push(task));
+			  	})
+			  	res.set(RESPONSE_HEADERS);
+	          	res.json(allTasks);
+			});
+		}
 	});
-
 
 
 	app.listen(APP_PORT, () => {
     	console.log('listening on ' + APP_PORT);
   	});
 });
+
+
+
+
 
 
 /*

@@ -11,21 +11,13 @@ import { Task } from './task';
 export class TasksComponent {
   allTasks: Task[] = [];
   
-  constructor(private _tasksApi: TasksApi) {
-
-  }
-
-  private _toTaskClass(taskObject) {
-    return new Task();
-  }
+  constructor(private _tasksApi: TasksApi) { }
 
   ngOnInit() {
     this._tasksApi.getTasks()
     .subscribe(
         (response) => { 
-          console.log(response);
-          //this.allTasks = response.map(this._toTaskClass);
-          this.allTasks = response;
+          this.allTasks = response.map(taskObject => new Task(taskObject));
         },
         (error) => { 
           console.log("Error happenedd " + error);

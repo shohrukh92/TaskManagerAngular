@@ -8,10 +8,15 @@ export class Task {
   listId: string;
   listTitle: string;
 
-  /*constructor(newTitle: string = "", newIsCompleted: string = "", ) {
-    forE
-    { this.title, this.isCompleted, this._id, this.listId, this.listTitle } = taskObject;
-  }*/
+  constructor(taskObject) {
+    [ 
+      this.title, this.isCompleted, this._id, 
+      this.listId, this.listTitle 
+    ] = [
+      taskObject.title, taskObject.isCompleted, taskObject._id,
+      taskObject.listId, taskObject.listTitle
+    ];
+  }
 
   convertToUrlParams() {
     let urlSearchParams = new URLSearchParams();

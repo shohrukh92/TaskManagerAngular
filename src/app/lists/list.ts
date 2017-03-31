@@ -5,10 +5,10 @@ export class List {
   description: string;
   _id: string;
 
-  constructor(newTitle: string = "", newDescription: string = "", newId: string = "") {
-    this.title = newTitle;
-    this.description = newDescription;
-    this._id = newId;
+  constructor(title: string = "", description: string = "", _id: string = "") {
+    this.title = title;
+    this.description = description;
+    this._id = _id;
   }
 
   isValidList() {

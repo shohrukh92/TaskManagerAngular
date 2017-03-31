@@ -13,7 +13,7 @@ export class ListsApi {
     return this._apiService.post(this.path, list.convertToUrlParams());
   }
 
-  getLists(): Observable<List[]> {
+  getLists(): Observable<any[]> {
     return this._apiService.get(this.path);
   }
 
