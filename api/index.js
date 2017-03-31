@@ -1,10 +1,8 @@
+//TODO: use separate modules and require them in this file
 const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
 
@@ -24,6 +22,8 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
   	db = database;
   	console.log('connected to db ' + MONGO_LAB_DB_URL);
 
+  	//set body parser and access control in headers for CORS 
+  	setAppUseConfigs();
   		
   	//TODO: implement routing
 	app.get('/lists', (req, res) => {
@@ -104,11 +104,41 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 		}
 	});
 
+	app.put('/tasks', (req, res) => {
+		console.log(req.body);
+		res.set(RESPONSE_HEADERS);
+	  	res.json({'status': 'SUCCESS'});
+	});
+
 
 	app.listen(APP_PORT, () => {
     	console.log('listening on ' + APP_PORT);
   	});
 });
+
+
+function setAppUseConfigs() {
+	app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(bodyParser.json());
+	app.use(function (req, res, next) {
+
+	    // Website you wish to allow to connect
+	    res.setHeader('Access-Control-Allow-Origin', '*');
+
+	    // Request methods you wish to allow
+	    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+	    // Request headers you wish to allow
+	    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+	    // Set to true if you need the website to include cookies in the requests sent
+	    // to the API (e.g. in case you use sessions)
+	    res.setHeader('Access-Control-Allow-Credentials', true);
+
+	    // Pass to next layer of middleware
+	    next();
+	});
+}
 
 
 
