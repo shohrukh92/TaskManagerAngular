@@ -8,11 +8,6 @@ const ObjectId = require('mongodb').ObjectID;
 
 const MONGO_LAB_DB_URL = 'mongodb://testuser:olkefk4394kfwejf04@ds141950.mlab.com:41950/taskmanager';
 const APP_PORT = process.env.PORT || 3500;
-const RESPONSE_HEADERS = {
-  'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods' : 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
-};
 
 MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
   	if (err) {
@@ -31,7 +26,6 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 			if (err) {
 	            console.log(err);
 	        } else {
-	        	res.set(RESPONSE_HEADERS);
 	            res.json(data);
 	        }
 		});
@@ -44,7 +38,6 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 		};
 		
 		db.collection('lists').insert(insertDoc, function(err, docsInserted){
-		    res.set(RESPONSE_HEADERS);
 	  		res.json({'status': 'SUCCESS', 'insertedList': docsInserted.ops[0]});
 		});		
 	});
@@ -53,7 +46,6 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 	app.post('/lists/delete', (req, res) => {
 		let _id = req.body._id;
 		db.collection('lists').remove({"_id": ObjectId(_id)}, (err, ins) => {
-			res.set(RESPONSE_HEADERS);
 	  		res.json({'status': 'SUCCESS'});
 		});
 	})
@@ -98,7 +90,6 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 			  	values.forEach(tasksArr => {
 			  		tasksArr.forEach(task => allTasks.push(task));
 			  	})
-			  	res.set(RESPONSE_HEADERS);
 	          	res.json(allTasks);
 			});
 		}
@@ -106,8 +97,7 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 
 	app.put('/tasks', (req, res) => {
 		console.log(req.body);
-		res.set(RESPONSE_HEADERS);
-	  	res.json({'status': 'SUCCESS'});
+		res.json({'status': 'SUCCESS'});
 	});
 
 
