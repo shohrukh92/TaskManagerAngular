@@ -42,9 +42,10 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 		});		
 	});
 
-	/*TODO: app.delete('/lists/:list_id', (req, res) => {})*/
-	app.post('/lists/delete', (req, res) => {
-		let _id = req.body._id;
+	//TODO: remove all tasks where listId = _id
+	app.delete('/lists/:list_id', (req, res) => {
+		let _id = req.params['list_id'];
+		
 		db.collection('lists').remove({"_id": ObjectId(_id)}, (err, ins) => {
 	  		res.json({'status': 'SUCCESS'});
 		});
