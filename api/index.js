@@ -31,6 +31,38 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 		});
 	});
 
+	app.get('/lists/tasks', (req, res) => {
+		db.collection('lists').find({}).toArray((err, listsData) => {
+			if (err) {
+	            console.log(err);
+	        } else {
+	            //res.json(data);
+	            let promises = [];
+				listsData.forEach((list) => {
+					promises.push(new Promise((resolve, reject) => {
+						db.collection('tasks')
+						  .find({ listId : String(list._id) })
+						  .toArray((err, tasksArrData) => {
+							if (err) {
+					            console.log(err);
+					            reject(err);
+					        } else {
+					        	resolve({
+					        		'list': list,
+					        		'tasks': tasksArrData
+					        	});
+					        }
+						});
+					}));
+				});
+				Promise.all(promises).then(values => { 
+				  	res.json(values);
+				});
+	        }
+		});
+	});
+
+
 	app.post('/lists', (req, res) => {
 		let insertDoc = {
 			title: req.body.title,
@@ -98,14 +130,15 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 
 	app.put('/tasks', (req, res) => {
 		let updatedTask = req.body;
-
 		db.collection('tasks').update(
-		   { _id: ObjectId(updatedTask._id) },
-		   { 
+			{ _id: ObjectId(updatedTask._id) },
+		   	{ 
 		   		$set: {
-					isCompleted: updatedTask.isCompleted
-				}
-		   }
+		   			title: updatedTask.title,
+		   			isCompleted: updatedTask.isCompleted,
+		   			listId: updatedTask.listId
+		   		}
+		   	}
 		)
 		res.json({'status': 'SUCCESS',
 			"upd": updatedTask

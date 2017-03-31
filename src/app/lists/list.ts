@@ -5,6 +5,7 @@ export class List {
   description: string;
   _id: string;
 
+  //TODO: replace with object param
   constructor(title: string = "", description: string = "", _id: string = "") {
     this.title = title;
     this.description = description;
@@ -23,7 +24,6 @@ export class List {
     let urlSearchParams = new URLSearchParams();
     urlSearchParams.append('title', this.title);
     urlSearchParams.append('description', this.description);
-    urlSearchParams.append('_id', this._id);
     return urlSearchParams.toString();
   }
 }

@@ -17,6 +17,10 @@ export class ListsApi {
     return this._apiService.get(this.path);
   }
 
+  getListsWithTasks(): Observable<any[]> {
+    return this._apiService.get(`${this.path}/tasks`);
+  }
+
   deleteList(listId: string) {
     return this._apiService.delete(`${this.path}/${listId}`);
   }
