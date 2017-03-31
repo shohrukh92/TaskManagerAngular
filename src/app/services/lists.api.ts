@@ -17,7 +17,7 @@ export class ListsApi {
     return this._apiService.get(this.path);
   }
 
-  deleteList(list: List) {
-    return this._apiService.delete(`${this.path}/delete`, list.convertToUrlParams());
+  deleteList(listId: string) {
+    return this._apiService.delete(`${this.path}/${listId}`);
   }
 }

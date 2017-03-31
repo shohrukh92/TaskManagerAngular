@@ -44,7 +44,7 @@ export class ListsComponent implements OnInit {
   }
 
   onDeleteList(removedList) {
-    this._listsApi.deleteList(removedList)
+    this._listsApi.deleteList(removedList._id)
       .subscribe(
           (response) => { 
             let removedListIndex = this.taskLists.findIndex((currentList) => {
