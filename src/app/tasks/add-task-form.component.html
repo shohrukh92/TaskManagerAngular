@@ -1,3 +1,4 @@
+<!-- TODO: add form validation -->
 <form class="form-inline">
     <div class="form-group">
         <label>Title</label>
@@ -9,17 +10,13 @@
     </div>
     <div class="form-group">
         <label>Parent List</label>
-        <!--<input 
-            [(ngModel)]="newTask.listId"
-            name="newTaskListId"
-            type="text" class="form-control" placeholder="List id">-->
         <select [(ngModel)]="newTask.listId" name="newTaskListId" class="form-control">
-          <option *ngFor="let list of allLists" [ngValue]="list._id">{{ list.title }}</option>
+          <option 
+            *ngFor="let list of allLists" 
+            [ngValue]="list._id"
+          >{{ list.title }}</option>
         </select>
     </div>
     <button (click)="addNewTask()" type="submit" class="btn btn-success">Add</button>
     <button *ngIf="taskEditMode" type="submit" class="btn btn-info">Save</button>
 </form>
-<pre>
-  {{ newTask | json }}
-</pre>

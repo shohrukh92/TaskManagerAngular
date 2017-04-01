@@ -10,7 +10,7 @@ export class TasksApi {
   constructor(private _apiService: ApiService) {}
 
   createTask(task: Task) {
-    return this._apiService.post(this.path, 'task.convertToUrlParams()');
+    return this._apiService.post(this.path, task.convertToUrlParams());
   }
 
   updateTask(task: Task) {
