@@ -10,12 +10,13 @@ import { Task } from './task';
 export class AddTaskFormComponent {
   @Input() taskEditMode = false;
   @Input() allLists: List[] = [];
+  @Output() createTaskEvent = new EventEmitter<Task>();
 
   newTask: Task = new Task({});
 
   constructor() {}
   
   addNewTask () {
-
+    this.createTaskEvent.emit(this.newTask);
   }
 }

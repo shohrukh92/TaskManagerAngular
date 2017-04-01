@@ -7,13 +7,14 @@
     <add-task-form 
       [taskEditMode]="taskEditMode" 
       [allLists]="allLists"
-      (createListEvent)="onCreateList($event)"
+      (createTaskEvent)="onCreateTask($event)"
     >
     </add-task-form>
   </div>
 
   <tasks-table 
     [allTasks]="allTasks"
+    [allLists]="allLists"
     (updateTaskStatusEvent)="onUpdateTaskStatus($event)"
   >
   </tasks-table>

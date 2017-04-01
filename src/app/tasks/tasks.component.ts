@@ -21,10 +21,10 @@ export class TasksComponent {
     this._listsApi.getListsWithTasks()
     .subscribe(
         (response) => { 
-          console.log(response);
           response.forEach(listObject => {
             let {list, tasks} = listObject;
-            this.allLists.push(new List(list.title, list.description));
+            this.allLists.push(new List(list.title, list.description, list._id));
+            
             tasks.forEach(taskObject => {
               this.allTasks.push(new Task(taskObject));
             });
@@ -34,16 +34,6 @@ export class TasksComponent {
           console.log("Error happenedd " + error);
         }
     );
-
-    /*this._tasksApi.getTasks()
-    .subscribe(
-        (response) => { 
-          this.allTasks = response.map(taskObject => new Task(taskObject));
-        },
-        (error) => { 
-          console.log("Error happenedd " + error);
-        }
-    );*/
   }
 
   onUpdateTaskStatus(task: Task) {
@@ -59,6 +49,15 @@ export class TasksComponent {
   }
 
   onCreateTask(newTask: Task) {
-
+    this._tasksApi.createTask(newTask)
+    .subscribe(
+      (response) => {
+        console.log(response)
+        this.allTasks.push(new Task(response.insertedTask)); 
+      },
+      (error) => { 
+        console.log("Error happened " + error); 
+      }
+    );
   }
 }

@@ -145,6 +145,17 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 		});
 	});
 
+	app.post('/tasks', (req, res) => {
+		let insertDoc = {
+			title: req.body.title,
+			isCompleted: req.body.isCompleted == 'true',
+			listId: req.body.listId
+		};
+		
+		db.collection('tasks').insert(insertDoc, function(err, docsInserted){
+	  		res.json({'status': 'SUCCESS', 'insertedTask': docsInserted.ops[0]});
+		});
+	});
 
 	app.listen(APP_PORT, () => {
     	console.log('listening on ' + APP_PORT);

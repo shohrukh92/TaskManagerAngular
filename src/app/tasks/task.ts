@@ -5,18 +5,17 @@ export class Task {
   title: string;
   isCompleted: boolean;
   _id: string;
-
   listId: string;
-  listTitle: string;
 
   //TODO: refactoring for both Task and List class... ()
+  //TODO: isCompleted "true/false" convertation to bool
   constructor(taskObject) {    
     [ 
-      this.title, this.isCompleted, this._id, 
-      this.listId, this.listTitle 
+      this.title, this.isCompleted, 
+      this._id, this.listId
     ] = [
-      taskObject.title || "", taskObject.isCompleted || false, taskObject._id || "",
-      taskObject.listId || "", taskObject.listTitle || ""
+      taskObject.title || "", taskObject.isCompleted || false, 
+      taskObject._id || "", taskObject.listId || ""
     ];
   }
 
@@ -24,6 +23,7 @@ export class Task {
     let urlSearchParams = new URLSearchParams();
     urlSearchParams.append('title', this.title);
     urlSearchParams.append('isCompleted', String(this.isCompleted));
+    urlSearchParams.append('listId', this.listId);
     return urlSearchParams.toString();
   }
 }

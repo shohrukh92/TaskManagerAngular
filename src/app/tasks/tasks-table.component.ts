@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { List } from '../lists';
 import { Task } from './task';
 
 @Component({
@@ -7,7 +8,8 @@ import { Task } from './task';
 })
 
 export class TasksTableComponent {
-  @Input() allTasks = [];
+  @Input() allTasks:Task[] = [];
+  @Input() allLists:List[] = [];
   @Output() updateTaskStatusEvent = new EventEmitter<Task>();
 
   constructor() {}
@@ -15,5 +17,10 @@ export class TasksTableComponent {
   updateTaskStatus(task: Task) {
     task.isCompleted = !task.isCompleted;
     this.updateTaskStatusEvent.emit(task);
+  }
+
+  getListTitle(listId: string) {
+    let list = this.allLists.find(list => list._id == listId);
+    return list.title;
   }
 }
