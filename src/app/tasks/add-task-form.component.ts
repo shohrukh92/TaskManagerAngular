@@ -17,6 +17,12 @@ export class AddTaskFormComponent {
   constructor() {}
   
   addNewTask () {
-    this.createTaskEvent.emit(this.newTask);
+    if (this.newTask.isValidTask()) {
+      this.createTaskEvent.emit(this.newTask);
+    }
+    else {
+      console.log("Task title or parent list is empty");
+    }
+    this.newTask.clear();
   }
 }

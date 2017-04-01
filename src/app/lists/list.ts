@@ -18,7 +18,7 @@ export class List {
   
   clear() {
     this.title = this.description = this._id = "";
-  }  
+  }
 
   convertToUrlParams() {
     let urlSearchParams = new URLSearchParams();
