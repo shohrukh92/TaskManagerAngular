@@ -1,5 +1,30 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700);
 
+.main-container {
+  margin-bottom: 30px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #2780E3;
+}
+
+.footer-container {
+  width: auto;
+  padding: 0 15px;
+}
+
+.footer-container .text-muted {
+  margin: 10px 0;
+  color: #FFFFFF;
+}
+
+.panel .table {
+  margin-bottom: 5px;
+}
+
 .app-spinner {
   background: url(img/loading.gif) no-repeat center center;
   height: 400px;
