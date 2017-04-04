@@ -15,25 +15,26 @@ import { ApiService } from './services';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    AppComponent,        
-    ListsComponent, ListsTableComponent, AddListFormComponent,
-    TasksComponent, TasksTableComponent, AddTaskFormComponent,
-    AboutComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule, 
-    JsonpModule,
-    RouterModule.forRoot(RootRouterConfig, { useHash: true })
-  ],
-  providers: [
-    ApiService
-  ],
-  bootstrap: [ AppComponent ]
+    declarations: [
+        AppComponent,        
+        ListsComponent, ListsTableComponent, AddListFormComponent,
+        TasksComponent, TasksTableComponent, AddTaskFormComponent,
+        AboutComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpModule, 
+        JsonpModule,
+        RouterModule.forRoot(RootRouterConfig, { useHash: true })
+    ],
+    providers: [
+        ApiService
+    ],
+    bootstrap: [ 
+        AppComponent 
+    ]
 })
-export class AppModule {
 
-}
+export class AppModule { }
