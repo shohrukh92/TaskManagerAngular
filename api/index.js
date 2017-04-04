@@ -78,8 +78,13 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 	app.delete('/lists/:list_id', (req, res) => {
 		let _id = req.params['list_id'];
 		
-		db.collection('lists').remove({"_id": ObjectId(_id)}, (err, ins) => {
-	  		res.json({'status': 'SUCCESS'});
+		db.collection('lists').remove({"_id": ObjectId(_id)}, (err, data) => {
+	  		if (err) {
+				console.log('error on deleting list');
+			}
+			else {
+				res.json({'status': 'SUCCESS'});
+			}
 		});
 	})
 
@@ -156,6 +161,20 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 	  		res.json({'status': 'SUCCESS', 'insertedTask': docsInserted.ops[0]});
 		});
 	});
+
+	app.delete('/tasks/:task_id', (req, res) => {
+		let _id = req.params['task_id'];
+
+		db.collection('tasks').remove({"_id": ObjectId(_id)}, (err, data) => {
+			if (err) {
+				console.log('error on deleting task');
+			}
+			else {
+				res.json({'status': 'SUCCESS'});
+			}
+		});
+	});
+
 
 	app.listen(APP_PORT, () => {
     	console.log('listening on ' + APP_PORT);

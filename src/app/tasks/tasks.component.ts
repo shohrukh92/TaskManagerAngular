@@ -60,4 +60,19 @@ export class TasksComponent {
       }
     );
   }
+
+  onDeleteTask(removedTask: Task) {
+    this._tasksApi.deleteTask(removedTask._id)
+      .subscribe(
+          (response) => { 
+            let removedTaskIndex = this.allTasks.findIndex((currentTask) => {
+              return currentTask._id == currentTask._id;
+            });
+            this.allTasks.splice(removedTaskIndex, 1);
+          },
+          (error) => { 
+            console.log("Error happened " + error); 
+          }
+      );
+  }
 }

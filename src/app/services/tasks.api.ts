@@ -21,7 +21,7 @@ export class TasksApi {
     return this._apiService.get(this.path);
   }
 
-  deleteTask(taskId: string, task: Task) {
+  deleteTask(taskId: string) {
     return this._apiService.delete(`${this.path}/${taskId}`);
   }
 }
