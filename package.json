@@ -6,7 +6,10 @@
     "build": "webpack --progress",
     "watch": "npm run build -- --watch",
     "server": "webpack-dev-server --inline --progress --port 3000 --content-base src",
-    "start": "npm run server"
+    "start": "npm run server",
+    "test": "karma start",
+    "test:comp": "karma start karma.conf.js",
+    "test:watch": "concurrently \"npm run watch\" \"karma start karma.conf.js\""
   },
   "contributors": [
     "Rob Wormald <robwormald@gmail.com>",
@@ -34,11 +37,23 @@
     "zone.js": "~0.6.26"
   },
   "devDependencies": {
+    "@types/jasmine": "~2.2.x",
     "@types/node": "^6.0.48",
     "angular2-router-loader": "^0.3.4",
     "angular2-template-loader": "^0.6.0",
     "awesome-typescript-loader": "^2.2.4",
+    "concurrently": "^3.4.0",
     "css-loader": "^0.25.0",
+    "jasmine": "^2.5.3",
+    "jasmine-core": "^2.5.2",
+    "karma": "^0.12.36",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-cli": "^1.0.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.3",
+    "protractor": "^5.1.1",
     "raw-loader": "^0.5.1",
     "to-string-loader": "^1.1.4",
     "typescript": "~2.0.10",
