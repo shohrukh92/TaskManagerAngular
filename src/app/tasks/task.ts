@@ -1,5 +1,4 @@
 import { URLSearchParams } from '@angular/http';    
-import { List } from '../lists';    
     
 export class Task {    
     title: string;    
@@ -7,8 +6,6 @@ export class Task {
     _id: string;    
     listId: string;    
     
-    //TODO: refactoring for both Task and List class... ()    
-    //TODO: isCompleted "true/false" convertation to bool    
     constructor(taskObject) {            
         [    
             this.title, this.isCompleted,    
@@ -24,7 +21,8 @@ export class Task {
     }    
     
     clear() {    
-        this.title = this._id = this.listId = "";    
+        this.title = this._id = this.listId = "";
+        this.isCompleted = false;    
     }    
     
     convertToUrlParams() {    

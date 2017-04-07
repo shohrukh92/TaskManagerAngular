@@ -11,7 +11,7 @@ export class AddListFormComponent {
     @Input() listEditMode = false;
     @Output() createListEvent = new EventEmitter<List>();
 
-    newList: List = new List();
+    newList: List = new List({});
     
     constructor(private _listsApi: ListsApi) {}
 

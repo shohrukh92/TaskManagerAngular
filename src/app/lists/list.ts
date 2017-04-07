@@ -5,11 +5,12 @@ export class List {
     description: string;
     _id: string;
 
-    //TODO: replace with object param
-    constructor(title: string = "", description: string = "", _id: string = "") {
-        this.title = title;
-        this.description = description;
-        this._id = _id;
+    constructor(listObject) {
+        [
+            this.title, this.description, this._id
+        ] = [
+            listObject.title || "", listObject.description || "", listObject._id || ""
+        ];
     }
 
     isValidList() {

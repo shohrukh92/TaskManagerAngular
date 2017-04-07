@@ -24,7 +24,7 @@ export class TasksComponent {
             (response) => { 
                 response.forEach(listObject => {
                     let {list, tasks} = listObject;
-                    this.allLists.push(new List(list.title, list.description, list._id));
+                    this.allLists.push(new List(list));
                     
                     tasks.forEach(taskObject => {
                         this.allTasks.push(new Task(taskObject));
