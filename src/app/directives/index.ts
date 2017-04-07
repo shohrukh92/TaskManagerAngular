@@ -1,0 +1,1 @@
+export { InputColorDirective } from './input-color.directive';

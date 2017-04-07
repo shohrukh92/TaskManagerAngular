@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ListsApi } from '../services';
 import { List } from './list';
+import { InputColorDirective } from '../directives';
 
 @Component({
     selector: 'add-list-form',
