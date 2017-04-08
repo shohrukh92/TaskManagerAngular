@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ListsApi } from '../services';
 import { List } from './list';
+import { Store } from '../store';
 
 @Component({
   selector: 'lists',
@@ -10,50 +11,44 @@ import { List } from './list';
 })
 
 export class ListsComponent implements OnInit, OnDestroy {
-  taskLists: List[] = [];
-  listEditMode: boolean = false;
+  taskLists: List[];
+  listEditMode: boolean;
 
-  constructor(private _listsApi: ListsApi) { }
+  constructor(
+    private _listsApi: ListsApi,
+    private _store: Store
+  ) {
+    this.taskLists = [];
+    this.listEditMode = false;
+  }
 
   ngOnInit() {
     console.log('List component has been initialized');
 
     this._listsApi.getLists()
+    .subscribe();
+
+    this._store.changes
+    .map(data => data.lists)
     .subscribe(
-        (response) => { 
-          this.taskLists = response.map(listObject => new List(listObject));
-        },
-        (error) => { 
-          console.log("Error happenedd " + error);
-        }
+      (lists: List[]) => {
+        //TODO: use interface instead of List and Task class ?
+        this.taskLists = lists; // lists.map(listObject => new List(listObject));
+      },
+      (error) => { 
+        console.log("Error happenedd " + error);
+      }
     );
   }
 
   onCreateList(newList) {
     this._listsApi.createList(newList)
-    .subscribe(
-      (response) => { 
-        this.taskLists.push(new List(response.insertedList)); 
-      },
-      (error) => { 
-        console.log("Error happened " + error); 
-      }
-    );
+    .subscribe();
   }
 
   onDeleteList(removedList) {
     this._listsApi.deleteList(removedList._id)
-      .subscribe(
-          (response) => { 
-            let removedListIndex = this.taskLists.findIndex((currentList) => {
-              return currentList._id == removedList._id;
-            });
-            this.taskLists.splice(removedListIndex, 1);
-          },
-          (error) => { 
-            console.log("Error happened " + error); 
-          }
-      );
+    .subscribe();
   }
 
   ngOnDestroy() {
