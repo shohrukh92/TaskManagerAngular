@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ListsApi } from '../services';
 import { List } from './list';
 
@@ -9,13 +9,15 @@ import { List } from './list';
   templateUrl: './lists.component.html'
 })
 
-export class ListsComponent implements OnInit {
+export class ListsComponent implements OnInit, OnDestroy {
   taskLists: List[] = [];
   listEditMode: boolean = false;
 
   constructor(private _listsApi: ListsApi) { }
 
   ngOnInit() {
+    console.log('List component has been initialized');
+
     this._listsApi.getLists()
     .subscribe(
         (response) => { 
@@ -53,5 +55,8 @@ export class ListsComponent implements OnInit {
           }
       );
   }
-  
+
+  ngOnDestroy() {
+    console.log('List component has been destroyed');
+  }
 }

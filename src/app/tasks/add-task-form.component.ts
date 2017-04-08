@@ -12,7 +12,7 @@ export class AddTaskFormComponent {
     @Input() allLists: List[] = [];    
     @Output() createTaskEvent = new EventEmitter<Task>();    
     
-    newTask: Task = new Task({});    
+    newTask: Task = new Task();    
     
     constructor() {}    
         

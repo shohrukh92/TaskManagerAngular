@@ -6,7 +6,7 @@ export class Task {
     _id: string;    
     listId: string;    
     
-    constructor(taskObject) {            
+    constructor(taskObject: any = {}) {            
         [    
             this.title, this.isCompleted,    
             this._id, this.listId    

@@ -5,7 +5,7 @@ export class List {
     description: string;
     _id: string;
 
-    constructor(listObject) {
+    constructor(listObject: any = {}) {
         [
             this.title, this.description, this._id
         ] = [
