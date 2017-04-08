@@ -24,7 +24,7 @@ export class StoreHelper {
             currentState, 
             {
                 [prop]: collection.map(item => {
-                    if (item.id !== state.id) {
+                    if (item._id !== state._id) {
                         return item;
                     }
                     return Object.assign({}, item, state)
@@ -33,14 +33,14 @@ export class StoreHelper {
         ));
     }
   
-    findAndDelete(prop, id) {
+    findAndDelete(prop, _id) {
         const currentState = this.store.getState();
         const collection = currentState[prop];
         this.store.setState(Object.assign(
             {}, 
             currentState, 
             {
-                [prop]: collection.filter(item => item.id !== id)
+                [prop]: collection.filter(item => item._id !== _id)
             }
         ));
     }

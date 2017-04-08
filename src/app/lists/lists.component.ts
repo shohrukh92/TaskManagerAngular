@@ -31,8 +31,9 @@ export class ListsComponent implements OnInit, OnDestroy {
     this._store.changes
     .map(data => data.lists)
     .subscribe(
-      (lists) => {
-        this.taskLists = lists.map(listObject => new List(listObject));
+      (lists: List[]) => {
+        //TODO: use interface instead of List and Task class ?
+        this.taskLists = lists; // lists.map(listObject => new List(listObject));
       },
       (error) => { 
         console.log("Error happenedd " + error);
