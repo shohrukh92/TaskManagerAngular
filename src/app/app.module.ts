@@ -12,6 +12,7 @@ import { ListsComponent, ListsTableComponent, AddListFormComponent } from './lis
 import { TasksComponent, TasksTableComponent, AddTaskFormComponent } from './tasks';
 import { InputColorDirective } from './directives';
 import { ApiService, StoreHelper } from './services';
+import { Store } from './store';
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
@@ -33,6 +34,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     ],
     providers: [
         ApiService,
+        Store, 
         StoreHelper
     ],
     bootstrap: [ 
