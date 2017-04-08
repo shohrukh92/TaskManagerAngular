@@ -5,8 +5,7 @@ import 'rxjs/Rx';
 export interface List {
     title: string
     description: string
-    
-    _id?: string | number
+    _id: string | number
     
     createdAt?: string,
     updatedAt?: string,

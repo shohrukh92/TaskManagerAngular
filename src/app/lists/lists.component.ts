@@ -41,16 +41,6 @@ export class ListsComponent implements OnInit, OnDestroy {
     );
   }
 
-  onCreateList(newList) {
-    this._listsApi.createList(newList)
-    .subscribe();
-  }
-
-  onDeleteList(removedList) {
-    this._listsApi.deleteList(removedList._id)
-    .subscribe();
-  }
-
   ngOnDestroy() {
     console.log('List component has been destroyed');
   }

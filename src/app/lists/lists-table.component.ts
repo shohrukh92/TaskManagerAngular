@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ListsApi } from '../services';
 import { List } from './list';
 
@@ -8,12 +8,13 @@ import { List } from './list';
 })
 
 export class ListsTableComponent {
-    @Input() taskLists: List[] = [];
-    @Output() deleteListEvent = new EventEmitter<List>();
-
-    constructor(private _listsApi: ListsApi) {}
+    @Input() taskLists: List[];
+    
+    constructor(private _listsApi: ListsApi) {
+        this.taskLists = [];
+    }
 
     deleteList(list: List) {
-        this.deleteListEvent.emit(list);        
+        this._listsApi.deleteList(list._id).subscribe();
     }
 }

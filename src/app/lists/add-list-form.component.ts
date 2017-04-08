@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ListsApi } from '../services';
 import { List } from './list';
 import { InputColorDirective } from '../directives';
@@ -9,15 +9,16 @@ import { InputColorDirective } from '../directives';
 })
 
 export class AddListFormComponent {
-    @Input() listEditMode = false;
-    @Output() createListEvent = new EventEmitter<List>();
-
-    newList: List = new List();
+    @Input() listEditMode;
+    newList: List;
     
-    constructor(private _listsApi: ListsApi) {}
+    constructor(private _listsApi: ListsApi) {
+         this.listEditMode = false;
+         this.newList = new List();
+    }
 
     addNewList() {
-        this.createListEvent.emit(this.newList);        
-        this.newList.clear();
+        //App states changes Changes automatically (rxjs)
+        this._listsApi.createList(this.newList).subscribe();
     }
 }
