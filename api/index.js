@@ -74,15 +74,18 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 		});		
 	});
 
-	//TODO: remove all sub-tasks where listId = _id || restrict deleting
 	app.delete('/lists/:list_id', (req, res) => {
 		let _id = req.params['list_id'];
 		
 		db.collection('lists').remove({"_id": ObjectId(_id)}, (err, data) => {
 	  		if (err) {
 				console.log('error on deleting list');
+				res.json({'status': 'ERROR'});
 			}
 			else {
+				db.collection('tasks').remove({"listId": _id}, (err, data) => {
+					//---
+				});
 				res.json({'status': 'SUCCESS'});
 			}
 		});
