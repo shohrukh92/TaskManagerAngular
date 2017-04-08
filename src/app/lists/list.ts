@@ -1,5 +1,3 @@
-import { URLSearchParams } from '@angular/http';
-
 export class List {
     title: string;
     description: string;
@@ -11,16 +9,5 @@ export class List {
         ] = [
             listObject.title || "", listObject.description || "", listObject._id || ""
         ];
-    }
-
-    clear() {
-        this.title = this.description = this._id = "";
-    }
-
-    convertToUrlParams() {
-        let urlSearchParams = new URLSearchParams();
-        urlSearchParams.append('title', this.title);
-        urlSearchParams.append('description', this.description);
-        return urlSearchParams.toString();
     }
 }

@@ -17,7 +17,7 @@ export class ListsApi {
     }
     
     createList(list: List) {    
-        return this._apiService.post(this.path, list.convertToUrlParams())
+        return this._apiService.post(this.path, list)
             .do(createListResponse => this._storeHelper.add('lists', createListResponse.insertedList));
     }
     

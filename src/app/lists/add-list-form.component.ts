@@ -13,12 +13,16 @@ export class AddListFormComponent {
     newList: List;
     
     constructor(private _listsApi: ListsApi) {
-         this.listEditMode = false;
-         this.newList = new List();
+         this._resetForm();         
     }
 
     addNewList() {
         //App states changes Changes automatically (rxjs)
         this._listsApi.createList(this.newList).subscribe();
+        this._resetForm();
+    }
+
+    private _resetForm() {
+        this.newList = new List();
     }
 }

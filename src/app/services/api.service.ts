@@ -1,30 +1,37 @@
-import { Injectable } from '@angular/core';    
-import { Headers, Http, Jsonp, Response, RequestOptions } from '@angular/http';    
-import { Observable } from 'rxjs/Observable';    
-import 'rxjs/Rx';    
-import 'rxjs/add/observable/throw';    
+import { Injectable } from '@angular/core';
+import { Headers, Http, Jsonp, Response, RequestOptions, URLSearchParams } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
+import 'rxjs/add/observable/throw';
     
 @Injectable()    
 export class ApiService {    
-    private _apiURL: string = 'http://localhost:3500';    
-    private _headers: Headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});        
-    private _options: RequestOptions = new RequestOptions({headers: this._headers});    
+    private _apiURL: string = 'http://localhost:3500';
+    private _headers: Headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+    private _options: RequestOptions = new RequestOptions({headers: this._headers});
     
     constructor(private _http: Http) {}    
     
     private _getJson(response: Response) {    
-        return response.json();    
+        return response.json();
+    }
+
+    private _convertToUrlParams(obj: any) {
+        let urlSearchParams = new URLSearchParams();
+        for (let key in obj) {
+            urlSearchParams.append(key, String(obj[key]));
+        }
+        return urlSearchParams.toString();
     }    
-    
     
     private _checkForError(response: Response): Response {    
         if (response.status >= 200 && response.status < 300) {    
-            return response;    
+            return response;
         } else {    
             var error = new Error(response.statusText)    
-            error['response'] = response;    
-            console.error(error);    
-            throw error;    
+            error['response'] = response;
+            console.error(error);
+            throw error;
         }    
     }    
     
@@ -39,7 +46,7 @@ export class ApiService {
     
     post(path: string, body): Observable<any> {    
         return this._http    
-            .post(`${this._apiURL}${path}`, body, this._options)    
+            .post(`${this._apiURL}${path}`, this._convertToUrlParams(body), this._options)    
             .map(this._checkForError)    
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'))    
             .map(this._getJson)    
