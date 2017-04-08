@@ -13,10 +13,6 @@ export class List {
         ];
     }
 
-    isValidList() {
-        return !(this.title.trim() == "");
-    }
-    
     clear() {
         this.title = this.description = this._id = "";
     }

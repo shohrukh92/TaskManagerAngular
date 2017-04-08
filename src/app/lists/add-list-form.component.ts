@@ -17,12 +17,7 @@ export class AddListFormComponent {
     constructor(private _listsApi: ListsApi) {}
 
     addNewList() {
-        if (this.newList.isValidList()) {
-            this.createListEvent.emit(this.newList);
-        }
-        else {
-            console.log("empty list (at least title should not be empty)");
-        }
+        this.createListEvent.emit(this.newList);        
         this.newList.clear();
     }
 }

@@ -50,3 +50,7 @@
   margin-top: 0px;
   margin-bottom: 0px;
 }
+
+form input:invalid {
+  border: 1px solid red;
+}

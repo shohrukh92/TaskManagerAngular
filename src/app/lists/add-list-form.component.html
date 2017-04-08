@@ -1,8 +1,10 @@
 <!-- TODO: add form validation -->
-<form class="form-inline">
+<form class="form-inline" #addListForm="ngForm">
     <div class="form-group">
         <label>Title</label>
         <input 
+            autofocus
+            required
             inputColor
             [(ngModel)]="newList.title" 
             name="newListTitle"
@@ -17,6 +19,10 @@
             name="newListDescription"
             type="text" class="form-control" placeholder="List description">
     </div>
-    <button (click)="addNewList()" type="submit" class="btn btn-success">Add</button>
+    <button 
+        [disabled]="!addListForm.form.valid"
+        (click)="addNewList()" 
+        type="submit" class="btn btn-success"
+    >Add</button>
     <button *ngIf="listEditMode" type="submit" class="btn btn-info">Save</button>
 </form>
