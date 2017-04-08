@@ -1,8 +1,10 @@
 <!-- TODO: add form validation -->
-<form class="form-inline">
+<form class="form-inline" #addTaskForm="ngForm">
     <div class="form-group">
         <label>Title</label>
         <input 
+            autofocus
+            required
             inputColor
             [(ngModel)]="newTask.title" 
             name="newTaskTitle"
@@ -11,13 +13,20 @@
     </div>
     <div class="form-group">
         <label>Parent List</label>
-        <select [(ngModel)]="newTask.listId" name="newTaskListId" class="form-control">
-          <option 
-            *ngFor="let list of allLists" 
-            [ngValue]="list._id"
-          >{{ list.title }}</option>
+        <select required [(ngModel)]="newTask.listId" name="newTaskListId" class="form-control">
+            <option class="default-option" value="">Select List</option>
+            <option 
+                *ngFor="let list of allLists" 
+                [ngValue]="list._id"
+            >{{ list.title }}</option>
         </select>
     </div>
-    <button (click)="addNewTask()" type="submit" class="btn btn-success">Add</button>
+    
+    <button 
+        [disabled]="!addTaskForm.form.valid"
+        (click)="addNewTask()" 
+        type="submit" class="btn btn-success"
+    >Add</button>
+    
     <button *ngIf="taskEditMode" type="submit" class="btn btn-info">Save</button>
 </form>

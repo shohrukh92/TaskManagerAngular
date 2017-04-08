@@ -16,10 +16,6 @@ export class Task {
         ];    
     }    
     
-    isValidTask() {    
-        return this.title.trim() != "" && this.listId != "";    
-    }    
-    
     clear() {    
         this.title = this._id = this.listId = "";
         this.isCompleted = false;    
