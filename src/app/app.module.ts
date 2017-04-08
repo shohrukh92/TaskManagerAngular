@@ -11,7 +11,7 @@ import { AboutComponent } from './about/about.component';
 import { ListsComponent, ListsTableComponent, AddListFormComponent } from './lists';
 import { TasksComponent, TasksTableComponent, AddTaskFormComponent } from './tasks';
 import { InputColorDirective } from './directives';
-import { ApiService } from './services';
+import { ApiService, StoreHelper } from './services';
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
@@ -32,7 +32,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
         RouterModule.forRoot(RootRouterConfig, { useHash: true })
     ],
     providers: [
-        ApiService
+        ApiService,
+        StoreHelper
     ],
     bootstrap: [ 
         AppComponent 
