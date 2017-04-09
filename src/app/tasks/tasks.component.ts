@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TasksApi } from '../services';
 import { ListsApi } from '../services';
 import { List } from '../lists';
@@ -11,7 +11,7 @@ import { Task } from './task';
     templateUrl: './tasks.component.html'
 })
 
-export class TasksComponent {
+export class TasksComponent implements OnInit {
     allLists: List[] = [];
     allTasks: Task[] = [];
     taskEditMode: boolean = false;
