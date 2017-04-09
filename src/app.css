@@ -54,3 +54,7 @@
 form input:invalid {
   border: 1px solid red;
 }
+
+ul.nav a.active {
+  background-color: #1967BE;
+}
