@@ -1,27 +1,25 @@
-import { Directive, ElementRef, Renderer } from '@angular/core';
+import { Directive, HostListener, ElementRef, Renderer } from '@angular/core';
 
 @Directive({
-    selector: '[inputColor]',
-    host: {
-        '(focus)': 'onFocus()',
-        '(blur)': 'onBlur()'
-    }
+    selector: '[inputColor]'    
 })
 
 export class InputColorDirective {
     focusStateColor: string;
-    blurStateColor: string;
 
     constructor(private _element: ElementRef, private _renderer: Renderer) {
-        this.focusStateColor = '#FFF9D3';
-        this.blurStateColor = '#FFFFFF';
+        this.focusStateColor = '#FFF9D3';        
     }
 
-    onFocus() {
-        this._element.nativeElement.style.backgroundColor = this.focusStateColor;
+    @HostListener('focus') onFocus() {
+        this._setBackgroundColor(this.focusStateColor);
     }
 
-    onBlur() {
-        this._element.nativeElement.style.backgroundColor = this.blurStateColor;
+    @HostListener('blur') onBlur() {
+        this._setBackgroundColor(null);
+    }
+
+    private _setBackgroundColor(color) {
+        this._element.nativeElement.style.backgroundColor = color;
     }
 }

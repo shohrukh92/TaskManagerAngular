@@ -5,7 +5,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let list of taskLists; let i = index;">
+        <tr *ngFor="let list of taskLists; let i = index;" highlightElement [highlightColor]="rowHighlightColor">
             <th scope="row">{{ i+1 }}</th>
             <td>{{ list.title }}</td>
             <td>{{ list.description }}</td>
