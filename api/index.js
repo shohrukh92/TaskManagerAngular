@@ -94,46 +94,13 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 
 	//-----------------------------------------------------------------------------
 	app.get('/tasks', (req, res) => {
-		db.collection('lists').find({}).toArray((err, data) => {
+		db.collection('tasks').find({}).toArray((err, data) => {
 			if (err) {
 	            console.log(err);
 	        } else {
-	        	getAllTasks(data);
+	        	res.json(data);
 	        }
 		});
-
-		function getAllTasks(lists) {
-			let promises = [];
-			
-			lists.forEach((list) => {
-				promises.push(new Promise((resolve, reject) => {
-					db.collection('tasks')
-					  .find({ listId : String(list._id) })
-					  .toArray((err, tasksArrData) => {
-						if (err) {
-				            console.log(err);
-				            reject(err);
-				        } else {
-				        	let result = []
-				        	tasksArrData.forEach((task) => {
-				        		task.listTitle = list.title;
-				        		result.push(task);
-				        	})
-				        	resolve(result);
-				        }
-					});
-				}));
-			});
-			Promise.all(promises).then(values => { 
-			  	//values is array of arrays
-			  	//TODO: code refactoring
-			  	let allTasks = []
-			  	values.forEach(tasksArr => {
-			  		tasksArr.forEach(task => allTasks.push(task));
-			  	})
-	          	res.json(allTasks);
-			});
-		}
 	});
 
 	app.put('/tasks', (req, res) => {
@@ -149,7 +116,7 @@ MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
 		   	}
 		)
 		res.json({'status': 'SUCCESS',
-			"upd": updatedTask
+			"updatedTask": updatedTask
 		});
 	});
 
