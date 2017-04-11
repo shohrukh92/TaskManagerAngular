@@ -8,11 +8,11 @@ import { List } from './list';
 })
 
 export class ListsTableComponent {
-    @Input() taskLists: List[];
+    @Input() lists: List[];
     rowHighlightColor: string = '#d2f3c7';
 
     constructor(private _listsApi: ListsApi) {
-        this.taskLists = [];
+        this.lists = [];
     }
 
     deleteList(list: List) {

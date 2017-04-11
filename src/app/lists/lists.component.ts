@@ -4,44 +4,43 @@ import { List } from './list';
 import { Store } from '../store';
 
 @Component({
-  selector: 'lists',
-  providers: [ListsApi],
-  styleUrls: ['./lists.component.css'],
-  templateUrl: './lists.component.html'
+    selector: 'lists',
+    providers: [ListsApi],
+    styleUrls: ['./lists.component.css'],
+    templateUrl: './lists.component.html'
 })
 
 export class ListsComponent implements OnInit, OnDestroy {
-  taskLists: List[];
-  listEditMode: boolean;
+    lists: List[];
+    listEditMode: boolean;
 
-  constructor(
-    private _listsApi: ListsApi,
-    private _store: Store
-  ) {
-    this.taskLists = [];
-    this.listEditMode = false;
-  }
+    constructor(
+        private _listsApi: ListsApi,
+        private _store: Store
+    ) {
+        this.lists = [];
+        this.listEditMode = false;
+    }
 
-  ngOnInit() {
-    console.log('List component has been initialized');
+    ngOnInit() {
+        console.log('List component has been initialized');
 
-    this._listsApi.getLists()
-    .subscribe();
+        this._listsApi.getLists()
+            .subscribe();
 
-    this._store.changes
-    .map(data => data.lists)
-    .subscribe(
-      (lists: List[]) => {
-        //TODO: use interface instead of List and Task class ?
-        this.taskLists = lists; // lists.map(listObject => new List(listObject));
-      },
-      (error) => { 
-        console.log("Error happenedd " + error);
-      }
-    );
-  }
+        this._store.changes
+            .map(data => data.lists)
+            .subscribe(
+                (lists: List[]) => {
+                    this.lists = lists;
+                },
+                (error) => { 
+                    console.log("Error happenedd " + error);
+                }
+            );
+    }
 
-  ngOnDestroy() {
-    console.log('List component has been destroyed');
-  }
+    ngOnDestroy() {
+        console.log('List component has been destroyed');
+    }
 }
