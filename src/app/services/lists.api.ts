@@ -13,7 +13,7 @@ export class ListsApi {
         private _apiService: ApiService,
         private _storeHelper: StoreHelper
     ) {
-         this.path = '/lists';
+        this.path = '/lists';
     }
     
     createList(list: List) {    
@@ -24,10 +24,6 @@ export class ListsApi {
     getLists(): Observable<any[]> {    
         return this._apiService.get(this.path)
             .do(allLists => this._storeHelper.update('lists', allLists));
-    }
-    
-    getListsWithTasks(): Observable<any[]> {    
-        return this._apiService.get(`${this.path}/tasks`);
     }
     
     deleteList(listId: string) {    
