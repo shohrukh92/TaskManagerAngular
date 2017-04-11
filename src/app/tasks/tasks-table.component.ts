@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { TasksApi } from '../services';
 import { List } from '../lists';
 import { Task } from './task';
 
@@ -8,24 +9,26 @@ import { Task } from './task';
 })
 
 export class TasksTableComponent {
-    @Input() allTasks:Task[] = [];
-    @Input() allLists:List[] = [];
-    @Output() updateTaskStatusEvent = new EventEmitter<Task>();
-    @Output() deleteTaskEvent = new EventEmitter<Task>();
-
-    constructor() {}
+    @Input() tasks: Task[];
+    @Input() lists: List[];
+    
+    constructor(private _tasksApi: TasksApi) {
+        this.tasks = [];
+        this.lists = [];
+    }
 
     updateTaskStatus(task: Task) {
         task.isCompleted = !task.isCompleted;
-        this.updateTaskStatusEvent.emit(task);
+        this._tasksApi.updateTask(task).subscribe();
     }
 
-    getListTitle(listId: string) {
-        let list = this.allLists.find(list => list._id == listId);
-        return list.title;
+    getListTitle(listId: string) {        
+        /*let list = this.lists.find(list => list._id === listId);
+        return list.title;*/
+        return 'listId';
     }
 
     deleteTask(task: Task) {
-        this.deleteTaskEvent.emit(task);
+        this._tasksApi.deleteTask(task._id).subscribe();
     }
 }

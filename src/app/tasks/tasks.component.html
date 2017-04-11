@@ -5,18 +5,12 @@
     <div class="panel-body">    
         <p>All tasks go here..</p>    
         <add-task-form    
-            [taskEditMode]="taskEditMode"    
-            [allLists]="allLists"    
-            (createTaskEvent)="onCreateTask($event)"    
+            [taskEditMode]="taskEditMode"
+            [lists]="lists"            
         >    
         </add-task-form>    
     </div>    
     
-    <tasks-table    
-        [allTasks]="allTasks"    
-        [allLists]="allLists"    
-        (updateTaskStatusEvent)="onUpdateTaskStatus($event)"    
-        (deleteTaskEvent)="onDeleteTask($event)"    
-    >    
+    <tasks-table [tasks]="tasks" [lists]="lists">    
     </tasks-table>    
 </div>

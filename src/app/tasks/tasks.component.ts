@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TasksApi } from '../services';
 import { ListsApi } from '../services';
+import { TasksApi } from '../services';
+import { Store } from '../store';
 import { List } from '../lists';
 import { Task } from './task';
 
@@ -12,68 +13,49 @@ import { Task } from './task';
 })
 
 export class TasksComponent implements OnInit {
-    allLists: List[] = [];
-    allTasks: Task[] = [];
+    tasks: Task[];
+    lists: List[];
     taskEditMode: boolean = false;
     
-    constructor(private _tasksApi: TasksApi, private _listsApi: ListsApi) { }
+    constructor(
+        private _tasksApi: TasksApi,
+        private _listsApi: ListsApi,
+        private _store: Store
+    ) {
+        this.tasks = [];
+        this.lists = [];
+    }
 
     ngOnInit() {
-        this._listsApi.getListsWithTasks()
-        .subscribe(
-            (response) => { 
-                response.forEach(listObject => {
-                    let {list, tasks} = listObject;
-                    this.allLists.push(new List(list));
-                    
-                    tasks.forEach(taskObject => {
-                        this.allTasks.push(new Task(taskObject));
-                    });
-                })
-            },
-            (error) => { 
-                console.log("Error happenedd " + error);
-            }
-        );
-    }
+        console.log('Task component has been initialized');
 
-    onUpdateTaskStatus(task: Task) {
-        this._tasksApi.updateTask(task)
-        .subscribe(
-            (response) => { 
-                console.log(`Task ${task.title} was updated`);                    
-            },
-            (error) => { 
-                console.log("Error happenedd " + error);
-            }
-        );
-    }
+        this._tasksApi.getTasks()
+            .subscribe();
 
-    onCreateTask(newTask: Task) {
-        this._tasksApi.createTask(newTask)
-        .subscribe(
-            (response) => {
-                console.log(response)
-                this.allTasks.push(new Task(response.insertedTask)); 
-            },
-            (error) => { 
-                console.log("Error happened " + error); 
-            }
-        );
-    }
+        this._store.changes
+            .map(data => data.tasks)
+            .subscribe(
+                (tasks: Task[]) => {
+                    this.tasks = tasks;                    
+                },
+                (error) => { 
+                    console.log("Error happenedd " + error);
+                }
+            );
 
-    onDeleteTask(removedTask: Task) {
-        this._tasksApi.deleteTask(removedTask._id)
-        .subscribe(
-            (response) => { 
-                let removedTaskIndex = this.allTasks.findIndex((currentTask) => {
-                    return currentTask._id == currentTask._id;
-                });
-                this.allTasks.splice(removedTaskIndex, 1);
-            },
-            (error) => { 
-                console.log("Error happened " + error); 
-            }
-        );
+        //TODO: move the logic of getting lists and tasks to main app.component
+        this._listsApi.getLists()
+            .subscribe();
+
+        this._store.changes
+            .map(data => data.lists)
+            .subscribe(
+                (lists: List[]) => {
+                    this.lists = lists;
+                },
+                (error) => { 
+                    console.log("Error happenedd " + error);
+                }
+            );
     }
 }

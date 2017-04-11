@@ -1,23 +1,17 @@
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Injectable } from '@angular/core';
+import { List } from './lists';
+import { Task } from './tasks';
 import 'rxjs/Rx';
-
-export interface List {
-    title: string
-    description: string
-    _id: string | number
-    
-    createdAt?: string,
-    updatedAt?: string,
-    userId?: string | number
-}
 
 export interface State {
     lists: List[]
+    tasks: Task[]
 }
 
 const defaultState: State = {
-    lists: []
+    lists: [],
+    tasks: []
 }
 
 const _store = new BehaviorSubject<State>(defaultState);

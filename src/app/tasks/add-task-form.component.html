@@ -16,7 +16,7 @@
         <select required [(ngModel)]="newTask.listId" name="newTaskListId" class="form-control">
             <option class="default-option" value="">Select List</option>
             <option 
-                *ngFor="let list of allLists" 
+                *ngFor="let list of lists" 
                 [ngValue]="list._id"
             >{{ list.title }}</option>
         </select>

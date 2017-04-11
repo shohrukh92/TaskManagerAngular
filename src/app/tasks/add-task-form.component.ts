@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';    
-import { List } from '../lists';    
-import { Task } from './task';    
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { TasksApi } from '../services';
+import { List } from '../lists';
+import { Task } from './task';
     
 @Component({    
     selector: 'add-task-form',    
@@ -8,16 +9,24 @@ import { Task } from './task';
 })    
     
 export class AddTaskFormComponent {    
-    @Input() taskEditMode = false;    
-    @Input() allLists: List[] = [];    
-    @Output() createTaskEvent = new EventEmitter<Task>();    
+    @Input() taskEditMode;
+    @Input() lists: List[];
+
+    newTask: Task;
     
-    newTask: Task = new Task();    
-    
-    constructor() {}    
+    constructor(private _tasksApi: TasksApi) {
+        this.newTask = new Task();
+        this.taskEditMode = false;
+        this.lists = [];        
+    }    
         
     addNewTask () {    
-        this.createTaskEvent.emit(this.newTask);    
-        this.newTask.clear();    
-    }    
+        //App states changes Changes automatically (rxjs)
+        this._tasksApi.createTask(this.newTask).subscribe();
+        this._resetForm();
+    }
+
+    private _resetForm() {
+        this.newTask = new Task();
+    }
 }
