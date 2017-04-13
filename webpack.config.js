@@ -1,3 +1,6 @@
+module.exports = require('./config/webpack.dev.js');
+
+/*
 var webpack = require('webpack');
 var path = require('path');
 var webpackMerge = require('webpack-merge');
@@ -82,3 +85,4 @@ var defaultConfig = {
 
 
 module.exports = webpackMerge(defaultConfig, webpackConfig);
+*/
