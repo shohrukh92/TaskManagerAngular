@@ -20,18 +20,18 @@ module.exports = webpackMerge(commonConfig, {
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.UglifyJsPlugin({ // https://github.com/angular/angular/issues/10618
             mangle: {
-            keep_fnames: true
+                keep_fnames: true
             }
         }),
         new ExtractTextPlugin('[name].[hash].css'),
         new webpack.DefinePlugin({
             'process.env': {
-            'ENV': JSON.stringify(ENV)
+                'ENV': JSON.stringify(ENV)
             }
         }),
         new webpack.LoaderOptionsPlugin({
             htmlLoader: {
-            minimize: false // workaround for ng2
+                minimize: false // workaround for ng2
             }
         })
     ]
