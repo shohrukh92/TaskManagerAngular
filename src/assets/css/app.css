@@ -26,7 +26,7 @@
 }
 
 .app-spinner {
-  background: url(img/loading.gif) no-repeat center center;
+  background: url(../img/loading.gif) no-repeat center center;
   height: 400px;
   width: 100%;
 }
