@@ -3,7 +3,10 @@ import '../assets/css/app.css';
 
 @Component({
     selector: 'app',
+    styleUrls: ['./app.component.css'],
     templateUrl: './app.component.html',
 })
 
-export class AppComponent { }
+export class AppComponent {
+    appTitle: string = 'Task Manager';
+}

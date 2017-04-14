@@ -1,10 +1,10 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Task Manager</a>
+            <a class="navbar-brand" href="#">{{ appTitle }}</a>
         </div>
 
-        <div class="collapse navbar-collapse">            
+        <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li role="presentation">
                     <a [routerLink]="['/lists']" routerLinkActive="active">
@@ -13,12 +13,12 @@
                     </a>
                 </li>
                 <li role="presentation">
-                    <a [routerLink]="['/tasks']" routerLinkActive="active">                    
+                    <a [routerLink]="['/tasks']" routerLinkActive="active">        
                         <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
                         All Tasks
                     </a>
                 </li>
-                <li role="presentation">        
+                <li role="presentation">
                     <a [routerLink]="['/about']" routerLinkActive="active">
                         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                         About this App
@@ -42,7 +42,4 @@
     <div class="footer-container">
         <p class="text-muted">© 2017 Simple Task Manager</p>
     </div>
-</footer>
-<footer>
-     
 </footer>
