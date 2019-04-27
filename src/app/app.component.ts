@@ -1,12 +1,10 @@
-import {Component} from '@angular/core';
-import '../assets/css/app.css';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app',
-    styleUrls: ['./app.component.css'],
-    templateUrl: './app.component.html',
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-
 export class AppComponent {
-    appTitle: string = 'Task Manager';
+  appTitle: string = 'Task Manager';
 }

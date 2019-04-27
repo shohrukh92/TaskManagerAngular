@@ -1,28 +1,29 @@
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Injectable } from '@angular/core';
 import { List } from './lists';
 import { Task } from './tasks';
-import 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 export interface State {
-    lists: List[]
-    tasks: Task[]
+    lists: List[];
+    tasks: Task[];
 }
 
 const defaultState: State = {
     lists: [],
     tasks: []
-}
+};
 
-const _store = new BehaviorSubject<State>(defaultState);
+const appStore = new BehaviorSubject<State>(defaultState);
 
 @Injectable()
 export class Store {
-    private store = _store;
+    private store = appStore;
 
-    changes = this.store.asObservable()
-        .distinctUntilChanged();
-    
+    changes = this.store.asObservable().pipe(
+        distinctUntilChanged()
+    );
+
     setState(state: State) {
         this.store.next(state);
     }

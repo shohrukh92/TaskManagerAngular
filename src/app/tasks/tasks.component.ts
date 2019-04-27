@@ -4,6 +4,7 @@ import { TasksApi } from '../services';
 import { Store } from '../store';
 import { List } from '../lists';
 import { Task } from './task';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'tasks',
@@ -16,7 +17,7 @@ export class TasksComponent implements OnInit {
     tasks: Task[];
     lists: List[];
     taskEditMode: boolean = false;
-    
+
     constructor(
         private _tasksApi: TasksApi,
         private _listsApi: ListsApi,
@@ -33,12 +34,12 @@ export class TasksComponent implements OnInit {
             .subscribe();
 
         this._store.changes
-            .map(data => data.tasks)
+            .pipe(map(data => data.tasks))
             .subscribe(
                 (tasks: Task[]) => {
-                    this.tasks = tasks;                    
+                    this.tasks = tasks;
                 },
-                (error) => { 
+                (error) => {
                     console.log("Error happenedd " + error);
                 }
             );
@@ -48,12 +49,12 @@ export class TasksComponent implements OnInit {
             .subscribe();
 
         this._store.changes
-            .map(data => data.lists)
+            .pipe(map(data => data.lists))
             .subscribe(
                 (lists: List[]) => {
                     this.lists = lists;
                 },
-                (error) => { 
+                (error) => {
                     console.log("Error happenedd " + error);
                 }
             );

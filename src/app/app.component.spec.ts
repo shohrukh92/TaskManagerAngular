@@ -1,36 +1,31 @@
-import { RouterTestingModule } from '@angular/router/testing';
-import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
+import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
-describe('AppComponent (inline template)', () => {
-    let comp: AppComponent;
-    let fixture: ComponentFixture<AppComponent>;
+describe('AppComponent', () => {
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AppComponent
+      ],
+    }).compileComponents();
+  }));
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [ RouterTestingModule ],
-            declarations: [ AppComponent ], // declare the test component
-            providers: [
-                { provide: ComponentFixtureAutoDetect, useValue: true }
-            ]
-        });
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
+  });
 
-        fixture = TestBed.createComponent(AppComponent);
-        comp = fixture.componentInstance; // AppComponent test instance
-    });
+  it(`should have as title 'task-manager-angular'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.title).toEqual('task-manager-angular');
+  });
 
-    it('should display original appTitle (Task Manager)', () => {
-        // query for the appTitle by CSS element selector
-        let de = fixture.debugElement.query(By.css('a.navbar-brand'));
-        let el = de.nativeElement;
-        expect(el.textContent).toContain(comp.appTitle);
-    });
-    
-    it('should count number of links in router (3)', () => {
-        let linkItems = fixture.debugElement.queryAll(By.css('ul.nav>li'));
-        expect(linkItems.length).toEqual(3);
-    });
+  it('should render title in a h1 tag', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to task-manager-angular!');
+  });
 });

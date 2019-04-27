@@ -1,18 +1,27 @@
-## Task Manager
-A simple Task Manager project using MEAN (MongoDB, Express, Angular, Node) stack.
-Backend API uses (mLab) MongoLab remote database https://mlab.com.
+# TaskManagerAngular
 
-### SPA (Angular2) Usage
-- Make sure you have [node.js](https://nodejs.org/) installed version 5+
-- Make sure you have NPM installed version 3+
-- run `npm install -g webpack webpack-dev-server typescript` to install global dependencies
-- run `npm install` to install dependencies
-- run `npm start` to fire up dev server
-- open browser to [`http://localhost:8080`](http://localhost:8080)
-- if you want to use other port, open `package.json` file, then change port in `--port 8080` script
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 
-### Backend (NodeJS) Usage
-- open the `api` directory
-- run `npm install` to install dependencies
-- run `npm run dev` to fire up NodeJS server (backend default port: 3500)
-- if you want to use other port, open `index.js` file, then change port in `const APP_PORT` or set the environment variable `PORT`
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

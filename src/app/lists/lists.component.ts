@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ListsApi } from '../services';
 import { List } from './list';
 import { Store } from '../store';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'lists',
@@ -29,12 +30,14 @@ export class ListsComponent implements OnInit, OnDestroy {
             .subscribe();
 
         this._store.changes
-            .map(data => data.lists)
+            .pipe(
+              map(data => data.lists)
+            )
             .subscribe(
                 (lists: List[]) => {
                     this.lists = lists;
                 },
-                (error) => { 
+                (error) => {
                     console.log("Error happenedd " + error);
                 }
             );

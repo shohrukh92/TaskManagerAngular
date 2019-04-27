@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { StoreHelper } from './store-helper';
-import { Observable } from 'rxjs/Observable';
 import { Task } from '../tasks';
-import 'rxjs/Rx';
-    
-@Injectable()    
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+@Injectable()
 export class TasksApi {
     path: string;
 
@@ -15,24 +15,32 @@ export class TasksApi {
     ) {
         this.path = '/tasks';
     }
-    
+
     createTask(task: Task) {
         return this._apiService.post(this.path, task)
-            .do(createTaskResponse => this._storeHelper.add('tasks', createTaskResponse.insertedTask));
+            .pipe(
+              tap(createTaskResponse => this._storeHelper.add('tasks', createTaskResponse.insertedTask))
+            );
     }
-    
+
     updateTask(task: Task) {
         return this._apiService.put(this.path, task)
-            .do(updatedTastResponse => this._storeHelper.findAndUpdate('tasks', updatedTastResponse.updatedTask));
+            .pipe(
+              tap(updatedTastResponse => this._storeHelper.findAndUpdate('tasks', updatedTastResponse.updatedTask))
+            );
     }
-    
+
     getTasks(): Observable<Task[]> {
-        return this._apiService.get(this.path)
-            .do(allTasks => this._storeHelper.update('tasks', allTasks));
+        return this._apiService.getTasks()
+            .pipe(
+              tap(allTasks => this._storeHelper.update('tasks', allTasks))
+            );
     }
-    
+
     deleteTask(taskId: string) {
         return this._apiService.delete(`${this.path}/${taskId}`)
-            .do(removedTask => this._storeHelper.findAndDelete('tasks', taskId));
+            .pipe(
+              tap(removedTask => this._storeHelper.findAndDelete('tasks', taskId))
+            );
     }
 }
