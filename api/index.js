@@ -6,7 +6,7 @@ const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
 
-const MONGO_LAB_DB_URL = 'mongodb://testuser:olkefk4394kfwejf04@ds141950.mlab.com:41950/taskmanager';
+const MONGO_LAB_DB_URL = 'mongodb://{url}';
 const APP_PORT = process.env.PORT || 3500;
 
 MongoClient.connect(MONGO_LAB_DB_URL, (err, database) => {
